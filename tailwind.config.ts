@@ -8,9 +8,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        display: ['Roboto', 'sans-serif'],
+        body: ['Roboto', 'sans-serif']
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+      },
+      width: {
+        '18': '4.5rem',  // Add this custom width
       },
     },
   },
