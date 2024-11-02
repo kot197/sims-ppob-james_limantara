@@ -1,5 +1,18 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "../globals.css";
+import NavBar from "../components/sims-app/navbar";
+
+const geistSans = localFont({
+  src: "../fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+});
+const geistMono = localFont({
+  src: "../fonts/GeistVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,6 +34,9 @@ export default function RootLayout({
       <body
         className={`font-body font-display antialiased`}
       >
+        <header>
+          <NavBar/>
+        </header>
         {children}
       </body>
     </html>
