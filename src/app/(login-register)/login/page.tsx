@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { AtSymbolIcon, UserIcon, LockClosedIcon } from '@heroicons/react/24/outline'
+import { AtSymbolIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 import InputField from "@/app/components/input-field";
 import Button from "@/app/components/button";
 
@@ -12,7 +12,7 @@ export default function Registration() {
                     <Image src='/logo.png' width={32} height={32} alt="Logo"/>
                     <span className="text-xl font-semibold">SIMS PPOB</span>
                 </div>
-                <p className="text-xl font-semibold">Lengkapi data untuk membuat akun</p>
+                <p className="text-xl font-semibold">Masuk atau buat akun untuk memulai</p>
                 <form className="flex flex-col w-full gap-8 mt-12">
                     <InputField
                         icon={<AtSymbolIcon className="size-5"/>}
@@ -21,31 +21,13 @@ export default function Registration() {
                         id="email"
                         type="text"/>
                     <InputField
-                        icon={<UserIcon className="size-5"/>}
-                        placeholder="nama depan"
-                        name="firstname"
-                        id="firstname"
-                        type="text"/>
-                    <InputField
-                        icon={<UserIcon className="size-5"/>}
-                        placeholder="nama belakang"
-                        name="lastname"
-                        id="lastname"
-                        type="text"/>
-                    <InputField
                         icon={<LockClosedIcon className="size-5"/>}
-                        placeholder="buat password"
+                        placeholder="masukan password anda"
                         name="password"
                         id="password"
                         type="password"/>
-                    <InputField
-                        icon={<LockClosedIcon className="size-5"/>}
-                        placeholder="konfirmasi password"
-                        name="confirmPassword"
-                        id="confirmPassword"
-                        type="password"/>
-                    <Button text="Registrasi"/>
-                    <p className="w-full text-center">sudah punya akun? login <span className="text-red-600 font-semibold">di sini</span></p>
+                    <Button text="Masuk"/>
+                    <p className="w-full text-center">belum punya akun? registrasi <span className="text-red-600 font-semibold">di sini</span></p>
                 </form>
             </div>
         </div>
