@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "../globals.css";
 import NavBar from "../components/sims-app/navbar";
+import { Provider } from 'react-redux';
+import { store } from '../state/store';
+import ReduxProvider from "../state/redux-provider";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -34,10 +37,12 @@ export default function RootLayout({
       <body
         className={`font-body font-display antialiased`}
       >
-        <header>
-          <NavBar/>
-        </header>
-        {children}
+        <ReduxProvider>
+          <header>
+            <NavBar/>
+          </header>
+            {children}
+        </ReduxProvider>
       </body>
     </html>
   );

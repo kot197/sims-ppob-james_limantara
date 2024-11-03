@@ -1,6 +1,10 @@
 import Image from "next/image";
 import IconMenuPembelian from "../components/sims-app/icon-menu-pembelian";
 import BalanceView from "../components/sims-app/balance-view";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../state/store";
+import { logout } from "../state/auth/authSlice";
+import { redirect } from "next/navigation";
 
 export default function Home() {
   return (

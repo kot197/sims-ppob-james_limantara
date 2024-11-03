@@ -1,6 +1,8 @@
+"use client"
 
-export default function InputField({icon, placeholder, name, id, type}
-    :{icon: React.ReactNode, placeholder: string, name:string, id:string, type:string}) {
+export default function InputField({icon, placeholder, name, id, type, value, setValue}
+    :{icon: React.ReactNode, placeholder: string, name:string, id:string, type:string, value:string, setValue: Function}) {
+
     return (
         <div className="relative flex">
             <div className="absolute left-3 top-1/3 text-gray-500">
@@ -11,6 +13,8 @@ export default function InputField({icon, placeholder, name, id, type}
                 id={id}
                 type={type}
                 placeholder={placeholder}
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
                 className="flex-1 pl-10 border-gray-500 py-3"/>
         </div>
     );
