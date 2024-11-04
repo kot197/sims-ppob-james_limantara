@@ -220,14 +220,14 @@ export default function AccountForm() {
                 {errors.last_name && <p className='text-red-400 mx-1'>{errors.last_name}</p>}
                 {!isEditing ? (
                     <>
-                        <Button type='button' onClick={() => setIsEditing(true)} text='Edit Profile' isActive={true}
-                        optionalClass='mt-8 bg-white text-red-500 border border-red-500'/>
+                        <Button altTheme={true} type='button' onClick={() => setIsEditing(true)} text='Edit Profile' isActive={true}
+                        optionalClass='mt-8 bg-white border border-red-500'/>
                         <Button type='button' onClick={handleLogout} text='Logout' isActive={true} optionalClass='mt-8'/>
                     </>
                 ) : (
                     <>
-                        <Button type='button' onClick={() => setIsEditing(false)} text='Cancel Editing' isActive={true}
-                        optionalClass='mt-8 bg-white text-red-500 border border-red-500'/>
+                        <Button altTheme={true} type='button' onClick={() => setIsEditing(false)} text='Cancel Editing' isActive={true}
+                        optionalClass='mt-8 bg-white border border-red-500'/>
                         <Button type='submit' text='Simpan' isActive={true} optionalClass='mt-8'/>
                     </>
                 )}
