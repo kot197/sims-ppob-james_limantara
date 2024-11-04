@@ -5,6 +5,7 @@ import Button from '../button';
 import { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { registerSchema } from '@/app/lib/validationSchema';
+import toast from 'react-hot-toast';
 
 export default function RegisterForm() {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -72,10 +73,12 @@ export default function RegisterForm() {
             console.log(response.status);
             const responseBody = await response.json();
             console.log(responseBody.message);
+            toast.error(responseBody.message);
         } else {
             console.log(response.status);
             const responseBody = await response.json();
             console.log(responseBody.message);
+            toast.success(responseBody.message);
         }
     }
 

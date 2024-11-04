@@ -5,6 +5,7 @@ import NavBar from "../components/sims-app/navbar";
 import { Provider } from 'react-redux';
 import { store } from '../state/store';
 import ReduxProvider from "../state/redux-provider";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -42,6 +43,7 @@ export default function RootLayout({
             <NavBar/>
           </header>
             {children}
+          <Toaster/>
         </ReduxProvider>
       </body>
     </html>

@@ -1,7 +1,16 @@
+"use client"
 import { EyeIcon } from '@heroicons/react/24/solid'
 import Image from "next/image";
+import { useSelector } from 'react-redux';
+import { RootState } from '../../state/store';
 
 export default function BalanceView() {
+    const user = useSelector((state: RootState) => state.user);
+    const auth = useSelector((state:RootState) => state.auth);
+
+    console.log(user);
+    console.log(auth.token);
+
     return (
         <div className="flex">
             {/* PROFILE PIC AND WELCOME TEXT */}
@@ -10,7 +19,7 @@ export default function BalanceView() {
                 <p className="font-normal leading-7 mt-4 text-xl">
                     Selamat datang,
                     <br/>
-                    <span className="font-bold text-3xl">Kristanto Wibowo</span>
+                    <span className="font-bold text-3xl">{user.first_name} {user.last_name}</span>
                 </p>
             </div>
             {/* SALDO */}

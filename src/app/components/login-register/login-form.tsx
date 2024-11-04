@@ -7,13 +7,26 @@ import { setToken } from '@/app/state/auth/authSlice';
 import { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { loginSchema } from '@/app/lib/validationSchema';
+import toast from 'react-hot-toast';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
+import { setUser } from '@/app/state/user/userSlice';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../state/store';
+import { increment } from '@/app/state/counter/counterSlice';
 
 export default function LoginForm() {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const isFormValid = Boolean(email && password);
+    // Redux
     const dispatch = useDispatch();
+    const user = useSelector((state: RootState) => state.user);
+    const count = useSelector((state: RootState) => state.counter.value);
+    const token = useSelector((state: RootState) => state.auth.token);
+    // Next Router
+    const router = useRouter();
 
     function validateForm(formObject: Record<string, any>) {
         const validation = loginSchema.safeParse(formObject);
@@ -43,9 +56,41 @@ export default function LoginForm() {
         return true;
     }
 
-    function handleLogin(token: string) {
+    async function handleLogin(token: string) {
         console.log(token);
         dispatch(setToken(token));
+        Cookies.set('token', token);
+
+        const response = await fetch('https://take-home-test-api.nutech-integrasi.com/profile', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },    
+        });
+
+        const responseBody = await response.json();
+
+        if(!response.ok) {
+            console.log(response.status);
+            console.log(responseBody.message);
+            toast.error(responseBody.message);
+        } else {
+            console.log(response.status);
+            console.log(responseBody.message);
+            console.log(responseBody.data);
+
+            dispatch(setUser(responseBody.data));
+            console.log(user);
+            toast.success(responseBody.message);
+
+            /*
+            const timer = setTimeout(() => {
+                router.push('/'); // Replace with your target route
+            }, 2000); // 1000 milliseconds = 1 second
+    
+            return () => clearTimeout(timer);
+            */
+        }
     }
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -74,12 +119,13 @@ export default function LoginForm() {
         if(!response.ok) {
             console.log(response.status);
             console.log(responseBody.message);
+            toast.error(responseBody.message);
         } else {
             console.log(response.status);
             console.log(responseBody.message);
+            toast.success(responseBody.message);
+            await handleLogin(responseBody.data.token);
         }
-
-        handleLogin(responseBody.data.token)
     }
 
     return (
@@ -104,6 +150,8 @@ export default function LoginForm() {
             {errors.password && <p className='text-red-400 mx-1 -mt-6'>{errors.password}</p>}
             <Button type='submit' text="Masuk" isActive={isFormValid}/>
             <p className="w-full text-center">belum punya akun? registrasi <Link href="/registration" className="text-red-600 font-semibold">di sini</Link></p>
+            <Button type='button' onClick={() => dispatch(setToken("test"))} text="Increment" isActive={true}/>
+            <p className="w-full text-center">{token}</p>
         </form>
     );
 }
