@@ -3,23 +3,18 @@ import InputField from '../input-field';
 import { BanknotesIcon } from '@heroicons/react/24/outline';
 import Button from '../button';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '@/app/state/auth/authSlice';
 import { FormEvent, useState } from 'react';
 import toast from 'react-hot-toast';
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
-import { setUser } from '@/app/state/user/userSlice';
 import { topUpSchema } from '@/app/lib/validationSchema';
 import TopUpBalanceButton from './top-up-balance-button';
 import { RootState } from '@/app/state/store';
-import { incrementBalanceByAmount, setBalance } from '@/app/state/balance/balanceSlice';
+import { setBalance } from '@/app/state/balance/balanceSlice';
 
 export default function TopUpForm() {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const [topUpAmount, setTopUpAmount] = useState<string>("");
     const auth = useSelector((state:RootState) => state.auth);
     const dispatch = useDispatch();
-    const router = useRouter();
 
     function validateForm(formObject: Record<string, any>) {
         const validation = topUpSchema.safeParse(formObject);

@@ -1,7 +1,7 @@
 "use client"
 import TransactionItem from "./transaction-item";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
 import toast from "react-hot-toast";
 import { addTransactions, clearTransactions } from "@/app/state/transactions/transactionHistorySlice";

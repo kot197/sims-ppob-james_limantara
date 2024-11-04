@@ -1,8 +1,4 @@
-import InputField from "@/app/components/input-field";
 import BalanceView from "../../components/sims-app/balance-view";
-import { BanknotesIcon } from '@heroicons/react/24/outline'
-import Button from "@/app/components/button";
-import TopUpBalanceButton from "@/app/components/sims-app/top-up-balance-button";
 import TopUpForm from "@/app/components/sims-app/top-up-form";
 
 export default function Home() {
