@@ -1,22 +1,8 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "../globals.css";
 import NavBar from "../components/sims-app/navbar";
-import { Provider } from 'react-redux';
-import { store } from '../state/store';
 import ReduxProvider from "../state/redux-provider";
 import { Toaster } from "react-hot-toast";
-
-const geistSans = localFont({
-  src: "../fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "../fonts/GeistVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,6 +14,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="en">
       <head>
@@ -39,6 +27,7 @@ export default function RootLayout({
         className={`font-body font-display antialiased`}
       >
         <ReduxProvider>
+          {}
           <header>
             <NavBar/>
           </header>

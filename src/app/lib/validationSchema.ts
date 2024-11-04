@@ -33,6 +33,19 @@ const confirmPasswordSchema = z
   .min(8, { message: "Confirm password must be at least 8 characters" })
   .max(64, { message: "Confirm password must be at most 64 characters long" });
 
+const topUpAmountSchema = z
+    .string() // Start with string validation
+    .transform((value) => {
+        // Attempt to convert the string to a number
+        const num = Number(value);
+        if (isNaN(num)) {
+            throw new Error("Invalid number"); // Throw an error if the conversion fails
+        }
+        return num; // Return the converted number
+    })
+    .refine((value) => value >= 10000, { message: "Number must be at least 10,000" }) // Min validation
+    .refine((value) => value <= 1000000, { message: "Number must not exceed 1,000,000" }) // Max validation
+
 export const loginSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
@@ -48,3 +61,7 @@ export const registerSchema = z.object({
   message: "Passwords don't match",
   path: ["confirmPassword"],
 });
+
+export const topUpSchema = z.object({
+    top_up_amount: topUpAmountSchema
+})

@@ -1,8 +1,21 @@
 'use client';
 import Image from 'next/image'
 import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function NavBar() {
+    const pathname = usePathname();
+
+    const [shouldRenderNavBar, setShouldRenderNavBar] = useState(true);
+
+    useEffect(() => {
+        const hideNavBarPaths = ['/login', '/registration'];
+        setShouldRenderNavBar(!hideNavBarPaths.includes(pathname));
+    }, [pathname]);
+
+    if (!shouldRenderNavBar) return null;
+    
     return (
         <nav className="flex justify-around items-center border-b-2">
             <div className="p-7 flex gap-2">

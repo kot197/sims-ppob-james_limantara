@@ -83,13 +83,13 @@ export default function LoginForm() {
             console.log(user);
             toast.success(responseBody.message);
 
-            /*
+            
             const timer = setTimeout(() => {
                 router.push('/'); // Replace with your target route
             }, 2000); // 1000 milliseconds = 1 second
     
             return () => clearTimeout(timer);
-            */
+            
         }
     }
 

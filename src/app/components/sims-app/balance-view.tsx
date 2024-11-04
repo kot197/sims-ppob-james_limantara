@@ -3,13 +3,52 @@ import { EyeIcon } from '@heroicons/react/24/solid'
 import Image from "next/image";
 import { useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { setBalance } from '@/app/state/balance/balanceSlice';
+import { useDispatch } from 'react-redux';
 
 export default function BalanceView() {
+    const [isVisible, setIsVisible] = useState(false);
     const user = useSelector((state: RootState) => state.user);
     const auth = useSelector((state:RootState) => state.auth);
+    const dispatch = useDispatch();
+    const amount = useSelector((state:RootState) => state.balance.amount);
 
     console.log(user);
     console.log(auth.token);
+
+    useEffect(() => {
+        (async () => {
+            // Function to fetch balance
+            const fetchBalance = async () => {
+                try {
+                    const response = await fetch('https://take-home-test-api.nutech-integrasi.com/balance', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${auth.token}`, // Use the auth token if needed
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    const responseBody = await response.json();
+
+                    if (!response.ok) {
+                        toast.error(responseBody.message);
+                    } else {
+                        dispatch(setBalance(responseBody.data.balance));
+
+                        toast.success(responseBody.message);
+                        console.log(responseBody.data.balance); // Handle balance data here
+                    }
+                } catch (error) {
+                    console.error('Error fetching balance:', error);
+                }
+            };
+
+            await fetchBalance(); // Call the function to fetch balance
+        })();
+    }, []);
 
     return (
         <div className="flex">
@@ -26,13 +65,16 @@ export default function BalanceView() {
             <div className="bg-red-500 rounded-2xl flex-1">
             <div className="flex flex-col text-white p-6">
                 <p className="text-md">Saldo anda</p>
-                <p className="text-3xl py-3">Rp <span className="text-4xl tracking-wider">•••••••</span></p>
+                <p className="text-3xl py-3">Rp <span className="text-4xl tracking-wider">{isVisible? amount : '•••••••' }</span></p>
                 <div className="flex items-center gap-2">
                 <p className="text-sm">Lihat Saldo</p>
-                <EyeIcon className="size-4"/>
+                <button onClick={() => setIsVisible(!isVisible)}>
+                    <EyeIcon className="size-4"/>
+                </button>
                 </div>
             </div>
             </div>
         </div>
     );
 }
+
