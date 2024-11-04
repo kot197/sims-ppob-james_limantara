@@ -2,7 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './auth/authSlice';
 import userReducer from './user/userSlice';
 import counterReducer from './counter/counterSlice';
-import balanceReducer from './balance/balanceSlice'
+import balanceReducer from './balance/balanceSlice';
+import transactionHistoryReducer from './transactions/transactionHistorySlice';
 
 export const makeStore = () => {
   return configureStore({
@@ -11,6 +12,7 @@ export const makeStore = () => {
       user: userReducer,
       counter: counterReducer,
       balance: balanceReducer,
+      transactionHistory: transactionHistoryReducer,
     },
   });
 }

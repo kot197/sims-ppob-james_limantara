@@ -6,13 +6,13 @@ import { RootState } from '../../state/store';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { setBalance } from '@/app/state/balance/balanceSlice';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '@/app/state/hooks';
 
 export default function BalanceView() {
     const [isVisible, setIsVisible] = useState(false);
     const user = useSelector((state: RootState) => state.user);
     const auth = useSelector((state:RootState) => state.auth);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const amount = useSelector((state:RootState) => state.balance.amount);
 
     console.log(user);

@@ -13,7 +13,6 @@ import { useRouter } from 'next/navigation';
 import { setUser } from '@/app/state/user/userSlice';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
-import { increment } from '@/app/state/counter/counterSlice';
 
 export default function LoginForm() {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -23,7 +22,6 @@ export default function LoginForm() {
     // Redux
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
-    const count = useSelector((state: RootState) => state.counter.value);
     const token = useSelector((state: RootState) => state.auth.token);
     // Next Router
     const router = useRouter();

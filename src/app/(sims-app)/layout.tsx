@@ -27,7 +27,6 @@ export default function RootLayout({
         className={`font-body font-display antialiased`}
       >
         <ReduxProvider>
-          {}
           <header>
             <NavBar/>
           </header>

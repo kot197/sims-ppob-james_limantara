@@ -1,23 +1,43 @@
 
-export default function TransactionItem({ amount, date, transactionMenu }: { amount:number, date: Date, transactionMenu: string }) {
-    const dateFormatter = new Intl.DateTimeFormat('en-GB', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    });
-    
-    const timeFormatter = new Intl.DateTimeFormat('en-GB', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-        timeZoneName: 'short'
-    })
+export default function TransactionItem({ amount, date, transactionMenu }: { amount:number, date: string, transactionMenu: string }) {
+    function formatDate(dateString: string) {
+        // Parse the date string
+        const date = new Date(dateString);
+
+        // Create a formatter for the desired locale and options
+        const options = {
+            year: 'numeric' as const,   // TypeScript expects specific string literals
+            month: 'long' as const,
+            day: '2-digit' as const,
+            hour: '2-digit' as const,
+            minute: '2-digit' as const,
+            timeZone: 'Asia/Jakarta', // Set the desired timezone
+            hour12: false, // 24-hour format
+        };
+
+        // Format the date
+        const formatter = new Intl.DateTimeFormat('en-US', options);
+        const [datePart, timePart] = formatter.formatToParts(date).reduce((acc, part) => {
+            if (part.type === 'day' || part.type === 'month' || part.type === 'year') {
+                acc[0] += part.value + ' '; // Build date part
+            } else if (part.type === 'hour' || part.type === 'minute') {
+                acc[1] += part.value + ':'; // Build time part
+            }
+            return acc;
+        }, ["", ""]);
+
+        // Remove the trailing colon from time part
+        const formattedTime = timePart.slice(0, -1);
+        
+        // Return the final formatted date string
+        return `${datePart.trim()} ${formattedTime} WIB`;
+    }
 
     return (
         <div className="flex border border-gray-300 rounded-lg py-2 px-8">
             <div className="flex flex-col grow gap-y-1">
                 <p className="text-2xl">{amount >= 0 ? '+' : '-'} Rp.{amount}</p>
-                <p className="text-sm text-gray-400">{dateFormatter.format(date)} {timeFormatter.format(date)}</p>
+                <p className="text-sm text-gray-400">{formatDate(date)}</p>
             </div>
             <p className="text-sm mt-2">{transactionMenu}</p>
         </div>

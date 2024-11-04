@@ -2,14 +2,14 @@
 import { z } from 'zod';
 
 const firstnameSchema = z.string()
-  .min(1, { message: "Username is required" })
-  .max(20, { message: "Username must be at most 20 characters long"})
+  .min(1, { message: "Firstname is required" })
+  .max(20, { message: "Firstname must be at most 20 characters long"})
   .regex(/^[a-zA-Z0-9_]+$/, { message: "Firstname can only contain letters, numbers, and underscores" });
 
 const lastnameSchema = z.string()
-  .min(1, { message: "Username is required" })
-  .max(20, { message: "Username must be at most 20 characters long"})
-  .regex(/^[a-zA-Z0-9_]+$/, { message: "Firstname can only contain letters, numbers, and underscores" });
+  .min(1, { message: "Lastname is required" })
+  .max(20, { message: "Lastname must be at most 20 characters long"})
+  .regex(/^[a-zA-Z0-9_]+$/, { message: "Lastname can only contain letters, numbers, and underscores" });
 
 const emailSchema = z
   .string()
@@ -64,4 +64,10 @@ export const registerSchema = z.object({
 
 export const topUpSchema = z.object({
     top_up_amount: topUpAmountSchema
-})
+});
+
+export const accountEditSchema = z.object({
+    email: emailSchema,
+    first_name: firstnameSchema,
+    last_name: lastnameSchema,
+});
