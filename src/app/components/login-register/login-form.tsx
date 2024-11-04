@@ -22,7 +22,6 @@ export default function LoginForm() {
     // Redux
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
-    const token = useSelector((state: RootState) => state.auth.token);
     // Next Router
     const router = useRouter();
 
