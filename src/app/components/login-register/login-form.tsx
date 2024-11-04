@@ -26,7 +26,7 @@ export default function LoginForm() {
     // Next Router
     const router = useRouter();
 
-    function validateForm(formObject: Record<string, any>) {
+    function validateForm(formObject: Record<string, FormDataEntryValue>) {
         const validation = loginSchema.safeParse(formObject);
 
         console.log(validation.error?.errors);

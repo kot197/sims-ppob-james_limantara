@@ -48,7 +48,6 @@ export default function AccountForm() {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                const base64String = reader.result as string;
                 uploadProfilePicture(file);
             };
             reader.readAsDataURL(file);
@@ -91,7 +90,7 @@ export default function AccountForm() {
         }
     }
 
-    function validateForm(formObject: Record<string, any>) {
+    function validateForm(formObject: Record<string, FormDataEntryValue>) {
         const validation = accountEditSchema.safeParse(formObject);
 
         console.log(validation.error?.errors);

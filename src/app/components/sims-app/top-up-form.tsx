@@ -16,7 +16,7 @@ export default function TopUpForm() {
     const auth = useSelector((state:RootState) => state.auth);
     const dispatch = useDispatch();
 
-    function validateForm(formObject: Record<string, any>) {
+    function validateForm(formObject: Record<string, FormDataEntryValue>) {
         const validation = topUpSchema.safeParse(formObject);
 
         console.log(validation.error?.errors);

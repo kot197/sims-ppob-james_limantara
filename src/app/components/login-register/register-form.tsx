@@ -17,7 +17,7 @@ export default function RegisterForm() {
     // Check if all fields are filled
     const isFormValid = Boolean(email && firstName && lastName && password && confirmPassword);
 
-    function validateForm(formObject: Record<string, any>) {
+    function validateForm(formObject: Record<string, FormDataEntryValue>) {
         const validation = registerSchema.safeParse(formObject);
 
         console.log(validation.error?.errors);
