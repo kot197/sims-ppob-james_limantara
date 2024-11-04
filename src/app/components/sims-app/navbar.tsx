@@ -20,7 +20,7 @@ export default function NavBar() {
         <nav className="flex justify-around items-center border-b-2">
             <Link href="/">
                 <div className="p-7 flex gap-2">
-                    <Image src='/logo.png' width={32} height={32} alt="Logo"/>
+                    <Image src='/Logo.png' width={32} height={32} alt="Logo"/>
                     <span className="text-xl font-semibold">SIMS PPOB</span>
                 </div>
             </Link>

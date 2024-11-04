@@ -148,8 +148,6 @@ export default function LoginForm() {
             {errors.password && <p className='text-red-400 mx-1 -mt-6'>{errors.password}</p>}
             <Button type='submit' text="Masuk" isActive={isFormValid}/>
             <p className="w-full text-center">belum punya akun? registrasi <Link href="/registration" className="text-red-600 font-semibold">di sini</Link></p>
-            <Button type='button' onClick={() => dispatch(setToken("test"))} text="Increment" isActive={true}/>
-            <p className="w-full text-center">{token}</p>
         </form>
     );
 }
