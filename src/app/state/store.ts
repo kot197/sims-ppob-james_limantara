@@ -4,8 +4,18 @@ import userReducer from './user/userSlice';
 import counterReducer from './counter/counterSlice';
 import balanceReducer from './balance/balanceSlice';
 import transactionHistoryReducer from './transactions/transactionHistorySlice';
+import promoReducer from './promo/promoSlice';
+import serviceListReducer from './services/serviceListSlice';
 import storage from 'redux-persist/lib/storage';
-import { persistReducer } from 'redux-persist';
+import {
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 
 const persistConfig = {
   key: "root",
@@ -18,6 +28,8 @@ const reducer = combineReducers({
   counter: counterReducer,
   balance: balanceReducer,
   transactionHistory: transactionHistoryReducer,
+  promo: promoReducer,
+  serviceList: serviceListReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
@@ -26,7 +38,13 @@ export const makeStore = () => {
   return configureStore({
     reducer: {
       reducer: persistedReducer,
-    },
+    }, 
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+    }),
   });
 }
 

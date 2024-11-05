@@ -10,6 +10,16 @@ const nextConfig: NextConfig = {
         hostname: 'minio.nutech-integrasi.com',
         pathname: '/take-home-test/profile/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'minio.nutech-integrasi.com',
+        pathname: '/take-home-test/banner/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'minio.nutech-integrasi.com',
+        pathname: '/take-home-test/services/**',
+      }
     ],
   },
 };

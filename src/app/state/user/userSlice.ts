@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface UserState {
+export interface UserState {
     email: string;
     first_name: string;
     last_name: string;
@@ -26,16 +26,8 @@ const userSlice = createSlice({
             state.last_name = action.payload.last_name;
             state.profile_image = action.payload.profile_image;
         },
-        updateUser(state, action: PayloadAction<Partial<UserState>>) {
-            // Update specific user fields
-            Object.assign(state, action.payload);
-        },
-        clearUser(state) {
-            // Clear user data
-            Object.assign(state, initialState);
-        }
     }
 });
 
-export const { setUser, updateUser, clearUser } = userSlice.actions;
+export const { setUser } = userSlice.actions;
 export default userSlice.reducer;

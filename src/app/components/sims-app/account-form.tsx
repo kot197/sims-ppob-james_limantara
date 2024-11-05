@@ -13,6 +13,7 @@ import { RootState } from '../../state/store';
 import Image from 'next/image'
 import { setUser } from '@/app/state/user/userSlice';
 import { accountEditSchema } from '@/app/lib/validationSchema';
+import ImageCircle from './image-circle';
 
 export default function AccountForm() {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -166,13 +167,7 @@ export default function AccountForm() {
     return (
         <div className="flex flex-col px-60 py-10 items-center">
             <div className='relative flex'>
-                <div className='relative w-32 h-32 rounded-full overflow-hidden'>
-                    <Image src={ user.profile_image.endsWith('null') ? "/Profile Photo.png" : user.profile_image }
-                        width={130}
-                        height={130}
-                        alt="Foto Profil"
-                        className='object-cover'/>
-                </div>
+                <ImageCircle defaultImageSrc="/Profile Photo.png" user={user} width={130} height={130}/>
                 <input
                     id="file"
                     type='file'

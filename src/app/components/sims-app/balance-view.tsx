@@ -1,12 +1,12 @@
 "use client"
-import { EyeIcon } from '@heroicons/react/24/solid'
-import Image from "next/image";
+import { EyeIcon } from '@heroicons/react/24/solid';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { setBalance } from '@/app/state/balance/balanceSlice';
 import { useAppDispatch } from '@/app/state/hooks';
+import ImageCircle from './image-circle';
 
 export default function BalanceView() {
     const [isVisible, setIsVisible] = useState(false);
@@ -54,7 +54,7 @@ export default function BalanceView() {
         <div className="flex">
             {/* PROFILE PIC AND WELCOME TEXT */}
             <div className="flex flex-col w-2/5">
-                <Image src='/Profile Photo.png' width={70} height={70} alt="Foto Profil"/>
+            <ImageCircle defaultImageSrc="/Profile Photo.png" user={user} width={70} height={70} className='w-16 h-16'/>
                 <p className="font-normal leading-7 mt-4 text-xl">
                     Selamat datang,
                     <br/>
