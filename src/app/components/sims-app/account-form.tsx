@@ -10,7 +10,6 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../state/store';
-import Image from 'next/image'
 import { setUser } from '@/app/state/user/userSlice';
 import { accountEditSchema } from '@/app/lib/validationSchema';
 import ImageCircle from './image-circle';
