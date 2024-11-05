@@ -13,7 +13,7 @@ import { setBalance } from '@/app/state/balance/balanceSlice';
 export default function TopUpForm() {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const [topUpAmount, setTopUpAmount] = useState<string>("");
-    const auth = useSelector((state:RootState) => state.auth);
+    const auth = useSelector((state:RootState) => state.reducer.auth);
     const dispatch = useDispatch();
 
     function validateForm(formObject: Record<string, FormDataEntryValue>) {

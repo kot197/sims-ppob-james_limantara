@@ -21,7 +21,7 @@ export default function LoginForm() {
     const isFormValid = Boolean(email && password);
     // Redux
     const dispatch = useDispatch();
-    const user = useSelector((state: RootState) => state.user);
+    const user = useSelector((state: RootState) => state.reducer.user);
     // Next Router
     const router = useRouter();
 

@@ -10,10 +10,10 @@ import { useAppDispatch } from '@/app/state/hooks';
 
 export default function BalanceView() {
     const [isVisible, setIsVisible] = useState(false);
-    const user = useSelector((state: RootState) => state.user);
-    const auth = useSelector((state:RootState) => state.auth);
+    const user = useSelector((state: RootState) => state.reducer.user);
+    const auth = useSelector((state:RootState) => state.reducer.auth);
     const dispatch = useAppDispatch();
-    const amount = useSelector((state:RootState) => state.balance.amount);
+    const amount = useSelector((state:RootState) => state.reducer.balance.amount);
 
     console.log(user);
     console.log(auth.token);

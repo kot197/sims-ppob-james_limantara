@@ -21,8 +21,8 @@ export default function AccountForm() {
     const [lastName, setLastName] = useState("");
     const [isEditing, setIsEditing] = useState(false);
     const dispatch = useDispatch();
-    const user = useSelector((state:RootState) => state.user);
-    const token = useSelector((state:RootState) => state.auth.token);
+    const user = useSelector((state:RootState) => state.reducer.user);
+    const token = useSelector((state:RootState) => state.reducer.auth.token);
     const router = useRouter();
 
     function handleLogout() {

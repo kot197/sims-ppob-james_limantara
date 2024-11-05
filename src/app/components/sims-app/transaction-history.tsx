@@ -11,8 +11,8 @@ export default function TransactionHistory() {
     const [offset, setOffSet] = useState(0);
     const [showMore, setShowMore] = useState(true);
     const limit = 5;
-    const transactions = useSelector((state: RootState) => state.transactionHistory.transactions);
-    const token = useSelector((state: RootState) => state.auth.token);
+    const transactions = useSelector((state: RootState) => state.reducer.transactionHistory.transactions);
+    const token = useSelector((state: RootState) => state.reducer.auth.token);
     const dispatch = useAppDispatch();
 
     const fetchTransactions = async () => {
