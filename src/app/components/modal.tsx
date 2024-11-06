@@ -35,7 +35,7 @@ export default function Modal({ isOpen, onClose, transactionConfirmText, transac
                     </div>
                 ) : (
                     <div className="flex flex-col items-center">
-                        <Image src="/confirm-icon.png" alt="Logo" width={64} height={64}></Image>
+                        <Image src={successStatus? "/confirm-icon.png" : "/close-red-icon.png"} alt="Logo" width={64} height={64}></Image>
                         <p className="mt-6">{transactionResultText}</p>
                         <p className="mt-1 -ml-1 text-2xl font-semibold">Rp{formattedCurrency}</p>
                         <p className="mt-1">{successStatus ? "berhasil!" : "gagal"}</p>
