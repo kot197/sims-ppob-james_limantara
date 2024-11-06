@@ -1,5 +1,5 @@
 
-export default function TransactionItem({ amount, date, transactionMenu }: { amount:number, date: string, transactionMenu: string }) {
+export default function TransactionItem({ amount, date, transactionMenu, transactionType }: { amount:number, date: string, transactionMenu: string, transactionType: string }) {
     function formatDate(dateString: string) {
         // Parse the date string
         const date = new Date(dateString);
@@ -33,10 +33,17 @@ export default function TransactionItem({ amount, date, transactionMenu }: { amo
         return `${datePart.trim()} ${formattedTime} WIB`;
     }
 
+    const formattedCurrency = new Intl.NumberFormat('id-ID').format(amount);;
+
     return (
         <div className="flex border border-gray-300 rounded-lg py-2 px-8">
             <div className="flex flex-col grow gap-y-1">
-                <p className="text-2xl">{amount >= 0 ? '+' : '-'} Rp.{amount}</p>
+                <p className={`text-2xl
+                    ${
+                        transactionType === "TOPUP" ? "text-emerald-400" : "text-red-500"
+                    }`}>
+                    {transactionType === "TOPUP" ? '+' : '-'} Rp.{formattedCurrency}
+                </p>
                 <p className="text-sm text-gray-400">{formatDate(date)}</p>
             </div>
             <p className="text-sm mt-2">{transactionMenu}</p>

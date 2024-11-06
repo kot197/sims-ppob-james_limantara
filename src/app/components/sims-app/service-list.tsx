@@ -57,7 +57,7 @@ export default function ServiceList() {
     return (
         <div className="flex py-12 justify-between">
             { services.map((service) => (
-                    <IconMenuPembelian key={service.service_code} srcPath={service.service_icon} altName={service.service_name} name={service.service_name}/>
+                    <IconMenuPembelian key={service.service_code} srcPath={service.service_icon} altName={service.service_name} name={service.service_name} code={service.service_code}/>
             ))}
         </div>
     );

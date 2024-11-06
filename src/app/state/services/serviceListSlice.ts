@@ -9,10 +9,12 @@ interface Service {
 
 interface ServicesState {
     services: Service[];
+    on_route: string;
 }
 
 const initialState: ServicesState = {
     services: [],
+    on_route: ''
 };
 
 const serviceListSlice = createSlice({
@@ -24,9 +26,12 @@ const serviceListSlice = createSlice({
       },
       clearServices: (state) => {
         state.services = [];
+      },
+      setServiceRoute: (state, action) => {
+        state.on_route = action.payload;
       }
     },
   });
   
-  export const { setServices, clearServices } = serviceListSlice.actions;
+  export const { setServices, clearServices, setServiceRoute } = serviceListSlice.actions;
   export default serviceListSlice.reducer;

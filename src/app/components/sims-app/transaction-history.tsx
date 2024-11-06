@@ -54,7 +54,12 @@ export default function TransactionHistory() {
     return (
         <div className="flex flex-col mt-2 gap-6">
             {transactions.map((transaction) => (
-                <TransactionItem key={transaction.invoice_number} amount={transaction.total_amount} date={transaction.created_on} transactionMenu={transaction.description}/>
+                <TransactionItem
+                    key={transaction.invoice_number}
+                    amount={transaction.total_amount} 
+                    date={transaction.created_on}
+                    transactionMenu={transaction.description}
+                    transactionType={transaction.transaction_type}/>
             ))}
             {showMore && (
                 <p className="mt-6 w-full text-center font-semibold text-red-600">
