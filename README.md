@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SIMS-PPOB App
+---
+## About this project
+A project made for take-home assignment to meet recruitment requirements
+* Language : Typescript
+* Library : ReactJS
+* Framework : NextJS
+* Global State Management : Redux
+* Validation : Zod
+* Styling : Tailwind CSS
+Deployed on Railway
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Screenshots
+---
+### Login/Registration
+![image](https://github.com/user-attachments/assets/14d65f71-c79f-414a-900f-bbcadeddbd83)
+![image](https://github.com/user-attachments/assets/72db4938-c723-4ed8-aaf3-db1911d52ec4)
+### Homepage
+![image](https://github.com/user-attachments/assets/3933c8e7-a4e9-4b4c-9747-d49aa3cfd217)
+### Top Up
+![image](https://github.com/user-attachments/assets/62257065-b3bb-4224-8e13-fc352a3b4e25)
+### Transaction History
+![image](https://github.com/user-attachments/assets/261bdaba-37bb-42bb-b89c-f94fc4be936f)
+### Transaction/Service Payment
+![image](https://github.com/user-attachments/assets/f1c92320-02a4-4a98-9c27-4f0b27109d5e)
+![image](https://github.com/user-attachments/assets/7a42556a-61b1-41d8-a023-ea90fe1da729)
+![image](https://github.com/user-attachments/assets/a585b46b-51af-4f70-a8c0-0e849a3ecac9)
+### Account
+![image](https://github.com/user-attachments/assets/86be9b64-4005-4cb1-8224-333e2907f61f)
