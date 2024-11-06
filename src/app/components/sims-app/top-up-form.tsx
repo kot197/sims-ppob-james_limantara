@@ -9,10 +9,14 @@ import { topUpSchema } from '@/app/lib/validationSchema';
 import TopUpBalanceButton from './top-up-balance-button';
 import { RootState } from '@/app/state/store';
 import { setBalance } from '@/app/state/balance/balanceSlice';
+import Modal from '../modal';
 
 export default function TopUpForm() {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const [topUpAmount, setTopUpAmount] = useState<string>("");
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [successStatus, setSuccessStatus] = useState<boolean>(false);
+    const [isConfirming, setIsConfirming] = useState<boolean>(true);
     const auth = useSelector((state:RootState) => state.reducer.auth);
     const dispatch = useDispatch();
 
@@ -69,17 +73,19 @@ export default function TopUpForm() {
             },
         });
 
+        const responseBody = await response.json();
+        console.log(response.status);
+        console.log(responseBody.message);
+
         if(!response.ok) {
-            console.log(response.status);
-            const responseBody = await response.json();
-            console.log(responseBody.message);
+            setSuccessStatus(false);
+            setIsConfirming(false);
             toast.error(responseBody.message);
         } else {
-            console.log(response.status);
-            const responseBody = await response.json();
             console.log(responseBody.data.balance);
             dispatch(setBalance(responseBody.data.balance));
-            console.log(responseBody.message);
+            setIsConfirming(false);
+            setSuccessStatus(true);
             toast.success(responseBody.message);
         }
     }
@@ -97,7 +103,21 @@ export default function TopUpForm() {
                     value={topUpAmount}
                     setValue={(value: string) => setTopUpAmount(value)}
                     />
-                <Button type='submit' text="TopUp" isActive={true} optionalClass="mt-8 w-full"/>
+                <Button onClick={() => {
+                    setIsConfirming(true);
+                    
+                    const object = {
+                        top_up_amount: topUpAmount
+                    }
+
+                    const valid = validateForm(object);
+
+                    if(!valid) {
+                        return;
+                    }
+
+                    setIsModalOpen(true)
+                }} text="TopUp" isActive={true} optionalClass="mt-8 w-full"/>
             </div>
             <div className="grid grid-cols-3 gap-y-6 gap-x-2 flex-1">
                 <TopUpBalanceButton onClick={() => setTopUpAmount("10000")} amount="10.000"/>
@@ -107,6 +127,15 @@ export default function TopUpForm() {
                 <TopUpBalanceButton onClick={() => setTopUpAmount("250000")} amount="250.000"/>
                 <TopUpBalanceButton onClick={() => setTopUpAmount("500000")} amount="500.000"/>
             </div>
+            <Modal
+                isOpen={isModalOpen}
+                isConfirming={isConfirming}
+                onClose={() => setIsModalOpen(false)}
+                transactionConfirmText={'Anda yakin untuk Top Up sebesar'}
+                transactionResultText={'Top Up sebesar'}
+                confirmButtonText={'Ya, lanjutkan Top Up'}
+                amount={parseInt(topUpAmount, 10)}
+                successStatus={successStatus}/>
         </form>
     );
 }

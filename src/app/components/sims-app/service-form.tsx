@@ -3,14 +3,18 @@ import InputField from '../input-field';
 import { BanknotesIcon } from '@heroicons/react/24/outline';
 import Button from '../button';
 import { useSelector } from 'react-redux';
-import { FormEvent, useEffect } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { RootState } from '@/app/state/store';
 import Image from "next/image";
 import { selectServiceByCode } from '@/app/state/selectors/serviceSelector';
 import { useRouter } from 'next/navigation';
+import Modal from '../modal';
 
 export default function ServiceForm() {
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [successStatus, setSuccessStatus] = useState<boolean>(false);
+    const [isConfirming, setIsConfirming] = useState<boolean>(true);
     const auth = useSelector((state:RootState) => state.reducer.auth);
     const code = useSelector((state:RootState) => state.reducer.serviceList.on_route);
     const service = useSelector((state:RootState) => selectServiceByCode(state, code));
@@ -39,8 +43,12 @@ export default function ServiceForm() {
             console.log(responseBody.message);
     
             if(!response.ok) {
+                setSuccessStatus(false);
+                setIsConfirming(false);
                 toast.error(responseBody.message);
             } else {
+                setSuccessStatus(true);
+                setIsConfirming(false);
                 toast.success(responseBody.message);
             }
         }
@@ -77,8 +85,22 @@ export default function ServiceForm() {
                     value={service?.service_tariff.toString() ?? ""}
                     readOnly={true}
                     />
-                <Button type='submit' text="Bayar" isActive={true} optionalClass="mt-8 w-full"/>
+                <Button onClick={() => {
+                    setIsConfirming(true);
+                    setIsModalOpen(true)
+                }} text="Bayar" isActive={true} optionalClass="mt-8 w-full"/>
             </div>
+            { service && (
+                <Modal
+                isOpen={isModalOpen}
+                isConfirming={isConfirming}
+                onClose={() => setIsModalOpen(false)}
+                transactionConfirmText={`Beli ${service.service_name} senilai`}
+                transactionResultText={`Pembayaran ${service.service_name} sebesar`}
+                confirmButtonText={'Ya, lanjutkan Bayar'}
+                amount={service?.service_tariff}
+                successStatus={successStatus}/>
+            )}
         </form>
     );
 }

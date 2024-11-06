@@ -33,7 +33,7 @@ export default function TransactionItem({ amount, date, transactionMenu, transac
         return `${datePart.trim()} ${formattedTime} WIB`;
     }
 
-    const formattedCurrency = new Intl.NumberFormat('id-ID').format(amount);;
+    const formattedCurrency = new Intl.NumberFormat('id-ID').format(amount);
 
     return (
         <div className="flex border border-gray-300 rounded-lg py-2 px-8">
